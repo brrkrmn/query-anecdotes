@@ -1,10 +1,14 @@
-const AnecdoteForm = () => {
+const AnecdoteForm = ({ newAnecdoteMutation, setNotification }) => {
 
   const onCreate = (event) => {
     event.preventDefault()
-    const content = event.target.anecdote.value
+    const newAnecdote = {
+      content: event.target.anecdote.value,
+      votes: 0,
+    }
     event.target.anecdote.value = ''
-    console.log('new anecdote')
+    newAnecdoteMutation.mutate(newAnecdote)
+    setNotification(`${newAnecdote.content} is added`)
 }
 
   return (
